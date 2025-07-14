@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Memories 📱</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    #bgVideo {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.9;
+      filter: brightness(0.7);
+    }
+    .phone-container {
+      position: relative;
+      width: 250px; height: 500px;
+      border: 12px solid #222;
+      border-radius: 36px;
+      background: #000;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      animation: zoomIn 4s ease forwards;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .screen {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      width: 100%; height: 100%;
+      object-fit: cover; opacity: 0;
+      transform: translateX(100%);
+      animation: slideFade 20s infinite;
+    }
+    .slide:nth-child(1) { animation-delay: 0s; }
+    .slide:nth-child(2) { animation-delay: 5s; }
+    .slide:nth-child(3) { animation-delay: 10s; }
+    .slide:nth-child(4) { animation-delay: 15s; }
+
+    @keyframes slideFade {
+      0%   { opacity: 0; transform: translateX(100%); }
+      5%   { opacity: 1; transform: translateX(0%); }
+      25%  { opacity: 1; transform: translateX(0%); }
+      30%  { opacity: 0; transform: translateX(-100%); }
+      100% { opacity: 0; transform: translateX(-100%); }
+    }
+    @keyframes zoomIn {
+      0%   { transform: scale(0.5); opacity: 0; }
+      50%  { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1.4); }
+    }
+    .next-button {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background-color: #d81b60; color: white;
+      padding: 12px 24px; border: none;
+      border-radius: 25px; font-size: 16px;
+      text-decoration: none; z-index: 5;
+    }
+    .next-button:hover {
+      background-color: #ad1457;
+      cursor: pointer;
+    }
+    .play-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: none;
+  z-index: 10;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+.play-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="candles.mp4" type="video/mp4">
+</video>
+
+<div class="phone-container">
+  <div class="screen">
+    <img src="photo1.jpg" class="slide" alt="Memory 1" />
+    <img src="photo2.jpg" class="slide" alt="Memory 2" />
+    <img src="photo3.jpg" class="slide" alt="Memory 3" />
+    <img src="photo4.jpg" class="slide" alt="Memory 4" />
+  </div>
+</div>
+
+<a href="page4.html" class="next-button">Next Surprise →</a>
+
+<audio id="bgMusic" loop>
+  <source src="lofi.mp3" type="audio/mpeg">
+</audio>
+
+<div class="play-button" id="musicButton">
+  <img src="play.png" alt="Play Music" id="playIcon">
+</div>
+<script>
+  const music = document.getElementById('bgMusic');
+  const button = document.getElementById('musicButton');
+  const icon = document.getElementById('playIcon');
+
+  let isPlaying = false;
+
+  button.addEventListener('click', () => {
+    if (!isPlaying) {
+      music.play();
+      icon.src = 'pause.png'; // (optional, if you add one)
+    } else {
+      music.pause();
+      icon.src = 'play.png';
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
+
+
+</body>
+</html>
