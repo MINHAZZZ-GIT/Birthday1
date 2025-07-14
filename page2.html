@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Letter 💌</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #bgVideo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 1;
+      filter: brightness(0.75);
+    }
+
+    .envelope-container {
+      position: relative;
+      width: 380px;
+      height: 250px;
+      cursor: pointer;
+      perspective: 1200px;
+      z-index: 1;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: #f8bbd0;
+      border-radius: 10px;
+      border: 2px solid #ffffff88;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #d81b60;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transition: transform 1.5s ease-in-out;
+      z-index: 3;
+    }
+
+    .stamp {
+      position: absolute;
+      top: 43%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border: 2px dashed #d81b60;
+      border-radius: 12px;
+      z-index: 4;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d81b60;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: opacity 0.5s ease;
+    }
+
+    .stamp.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .letter {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: #ffffff;
+      padding: 30px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+      transition: top 1s ease, opacity 1s ease;
+      z-index: 2;
+      opacity: 0;
+      overflow-y: auto;
+    }
+
+    .letter.visible {
+      top: 0;
+      opacity: 1;
+    }
+
+    .letter h2 {
+      color: #d81b60;
+    }
+
+    .next-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #d81b60;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      text-decoration: none;
+      z-index: 5;
+      display: none;
+    }
+
+    .next-button.visible {
+      display: inline-block;
+    }
+
+    .next-button:hover {
+      background-color: #ad1457;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="sunset.mp4" type="video/mp4">
+</video>
+
+<div class="envelope-container" onclick="openEnvelope()">
+  <div class="envelope">
+    <div class="flap" id="flap"></div>
+    <div class="stamp" id="stamp">💌</div>
+    <div class="letter" id="letter">
+      <h2>Happy Birthday, Alshifa🌸</h2>
+      <p>
+        This isn’t just a page. This is a little piece of intention something that I made just for you.<br><br>
+        I know you don’t expect much from a birthday. But that doesn’t mean you shouldn’t receive more than you imagined.<br><br>
+        You’re gentle, rare, and powerful in ways you don’t even notice. And you are one of the most beautiful soul i have ever met.<br><br>
+        So this is that moment. One of many. A beginning. 💫<br><br>
+        May this year bring you more peace, more joy, and more reasons to laugh without holding back.<br><br>
+        YOU DESERVE TO BE THE HAPPIEST PERSON IN THE WORLD.
+      </p>
+    </div>
+  </div>
+</div>
+
+<a href="page3.html" class="next-button" id="nextButton">Next Surprise →</a>
+
+<script>
+  function openEnvelope() {
+    document.getElementById('flap').style.transform = 'rotateX(-180deg)';
+    document.getElementById('stamp').classList.add('hidden');
+    setTimeout(() => {
+      document.getElementById('letter').classList.add('visible');
+      document.getElementById('nextButton').classList.add('visible');
+    }, 800);
+  }
+</script>
+
+</body>
+</html>
